@@ -1,171 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-        <!-- Meta Pixel Code -->
-        <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1166379392026151');
-    fbq('track', 'PageView');
-        </script>
-        <noscript>
-            <img
-                height="1"
-                width="1"
-                style="display:none"
-                src="https://www.facebook.com/tr?id=1166379392026151&ev=PageView&noscript=1"
-            >
-        </noscript>
-        <!-- End Meta Pixel Code -->
-        <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; position: relative; background: #020b18; }
-        
-        .video-bg { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .overlay { position: fixed; inset: 0; background: rgba(2, 11, 24, 0.9); z-index: -1; }
-        
-        .rb-circles { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-        .rb-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(50, 120, 220, 0.07); }
-        .rb-c1 { width: 600px; height: 600px; top: -250px; right: -200px; }
-        .rb-c2 { width: 400px; height: 400px; bottom: -150px; left: -150px; border-color: rgba(50, 120, 220, 0.05); }
-        .rb-c3 { width: 220px; height: 220px; top: 35%; right: 8%; border-color: rgba(50, 120, 220, 0.06); }
-        .rb-glow { position: fixed; top: -120px; left: 50%; transform: translateX(-50%); width: 500px; height: 350px; background: radial-gradient(ellipse, rgba(30, 90, 200, 0.15) 0%, transparent 70%); pointer-events: none; z-index: 0; }
-        
-        .rb-card { width: 100%; max-width: 410px; position: relative; z-index: 2; animation: rb-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        @keyframes rb-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .rb-top { background: #06121f; border: 1px solid rgba(50, 120, 220, 0.22); border-radius: 28px 28px 0 0; padding: 36px 28px 28px; text-align: center; position: relative; overflow: hidden; }
-        .rb-top::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #2a7fff, #7b5ea7, transparent); }
-        
-        .rb-avatar-ring { width: 100px; height: 100px; margin: 0 auto 20px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, #2a7fff, #7b5ea7); position: relative; }
-        .rb-avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: #06121f; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 30px; color: #2a7fff; font-weight: bold; }
-        .rb-avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
-        .rb-verified { position: absolute; bottom: 2px; right: 2px; width: 26px; height: 26px; background: #2a7fff; border-radius: 50%; border: 2px solid #06121f; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; font-weight: bold; }
-        
-        .rb-name { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; color: #e8f0ff; line-height: 1.2; margin-bottom: 6px; }
-        .rb-designation { display: inline-flex; align-items: center; gap: 6px; background: rgba(42, 127, 255, 0.1); border: 1px solid rgba(42, 127, 255, 0.22); border-radius: 20px; padding: 5px 14px; font-size: 11px; color: #6aabff; font-weight: 500; letter-spacing: 0.5px; margin-top: 4px; }
-        
-        .rb-body { background: #04101c; border: 1px solid rgba(50, 120, 220, 0.15); border-top: none; border-radius: 0 0 28px 28px; padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 22px; }
-        
-        .rb-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .rb-stat { background: rgba(42, 127, 255, 0.06); border: 1px solid rgba(42, 127, 255, 0.14); border-radius: 14px; padding: 14px 8px; text-align: center; }
-        .rb-stat-val { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: #5599ff; line-height: 1; margin-bottom: 4px; }
-        .rb-stat-lbl { font-size: 9px; color: #5a7ba6; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
-        
-        .rb-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #1258c0, #2a7fff); color: #fff; text-decoration: none; padding: 16px; border-radius: 16px; font-size: 14px; font-weight: 700; letter-spacing: 0.8px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(42, 127, 255, 0.2); }
-        .rb-btn::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent); animation: rb-shine 2.8s infinite; }
-        @keyframes rb-shine { 0% { left: -100%; } 100% { left: 200%; } }
-        .rb-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(42, 127, 255, 0.3); }
-        
-        .rb-features { display: flex; flex-direction: column; gap: 12px; }
-        .rb-feat { display: flex; align-items: center; gap: 12px; }
-        .rb-feat-dot { width: 30px; height: 30px; border-radius: 8px; background: rgba(42, 127, 255, 0.08); border: 1px solid rgba(42, 127, 255, 0.18); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-        .rb-feat-text { font-size: 13px; color: #7a9ac0; font-weight: 400; }
-        
-        .rb-trust { display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .rb-trust-pill { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 20px; padding: 6px 14px; font-size: 11px; color: #5a7ba6; font-weight: 500; }
-        
-        .rb-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid rgba(42, 127, 255, 0.08); }
-        .rb-footer-txt { font-size: 11px; color: #3a5070; font-weight: 400; }
-        .rb-agency { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5599ff; text-decoration: none; border: 1px solid rgba(42, 127, 255, 0.25); padding: 5px 12px; border-radius: 6px; transition: background 0.2s; }
-        .rb-agency:hover { background: rgba(42, 127, 255, 0.1); }
-        
-        .rb-disclaimer { font-size: 11px; color: #4a6285; line-height: 1.5; text-align: center; margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.03); }
-        </style>
-    </head>
-    <body>
-        <video
-            class="video-bg"
-            autoplay
-            muted
-            loop
-            playsinline
-        >
-            <source src="https://assets.mixkit.co/videos/9607/9607-720.mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <div class="rb-circles">
-            <div class="rb-circle rb-c1"></div>
-            <div class="rb-circle rb-c2"></div>
-            <div class="rb-circle rb-c3"></div>
-        </div>
-        <div class="rb-glow"></div>
-        <div class="rb-card">
-            <div class="rb-top">
-                <div class="rb-avatar-ring">
-                    <div class="rb-avatar-inner">
-                        <img src="image.png" alt="" onerror="this.style.display='none';">
-                    </div>
-                    <div class="rb-verified">✓</div>
-                </div>
-                <h1 class="rb-name">𝗥𝗔𝗗𝗛𝗜𝗞𝗔🔵</h1>
-                <div class="rb-designation">◆ Index Trading Expert</div>
-            </div>
-            <div class="rb-body">
-                <div class="rb-stats">
-                    <div class="rb-stat">
-                        <div class="rb-stat-val">24/7</div>
-                        <div class="rb-stat-lbl">Updates</div>
-                    </div>
-                    <div class="rb-stat">
-                        <div class="rb-stat-val">Free</div>
-                        <div class="rb-stat-lbl">To Join</div>
-                    </div>
-                    <div class="rb-stat">
-                        <div class="rb-stat-val">Live</div>
-                        <div class="rb-stat-lbl">Calls</div>
-                    </div>
-                </div>
-                <a href="https://t.me/+LfIiBHmHjXdhMDVl" class="rb-btn">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="18"
-                        height="18"
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                    >
-                        <path d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM6.79 10.89l-.27 3.67c.39 0 .56-.17.77-.38l1.85-1.76 3.84 2.8c.7.39 1.19.19 1.36-.65l2.47-11.59c.22-.98-.35-1.37-1.05-1.14L1.13 6.24c-.95.37-.93.9-.17 1.14l3.57 1.11 8.3-5.23c.39-.26.74-.12.45.14L6.79 10.89z"/>
-                    </svg>
-                    JOIN TELEGRAM CHANNEL
-                </a>
-                <div class="rb-features">
-                    <div class="rb-feat">
-                        <div class="rb-feat-dot">📊</div>
-                        <div class="rb-feat-text">Market Insights & Discussions</div>
-                    </div>
-                    <div class="rb-feat">
-                        <div class="rb-feat-dot">🎓</div>
-                        <div class="rb-feat-text">Learn with Experts</div>
-                    </div>
-                    <div class="rb-feat">
-                        <div class="rb-feat-dot">⚡</div>
-                        <div class="rb-feat-text">Practical Trading Strategies</div>
-                    </div>
-                </div>
-                <div class="rb-trust">
-                    <div class="rb-trust-pill">✦ Trusted Community</div>
-                    <div class="rb-trust-pill">✦ CA Backed</div>
-                </div>
-                <div class="rb-footer">
-                    <div class="rb-footer-txt">@Adzonn · Stay ahead with knowledge</div>
-                    <span class="agency-link" style="color: white;">📱 SIVIADSAGENCY</span>
-                </div>
-                <!-- डिस्क्लेमर में नाम ठीक कर दिया गया है -->
-                <p class="rb-disclaimer">
-                    <strong>DISCLAIMER:</strong>
-                    Educational platform. 𝗥𝗔𝗗𝗛𝗜𝗞𝗔 𝗧𝗥𝗔𝗗𝗘𝗥 is NOT SEBI registered. No tips or investment advice provided. Trading involves financial risk. This site is not part of Meta.
-                </p>
-            </div>
-        </div>
-    </body>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3249093068626276');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3249093068626276&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 15px;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: -1;
+}
+
+/* GLASS CARD DESIGN */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+    padding: 35px 25px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 10;
+}
+
+/* Profile */
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #f5c400;
+    margin-bottom: 15px;
+    box-shadow: 0 0 20px rgba(245, 196, 0, 0.3);
+}
+
+/* Title */
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f5c200;
+    line-height: 1.2;
+}
+
+.subtitle {
+    margin-top: 8px;
+    color: #00ffcc;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Badges */
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Button */
+.join-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #0088cc, #22d3ee);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 25px 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 136, 204, 0.4);
+}
+
+.join-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 136, 204, 0.6);
+}
+
+/* Features */
+.features {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.feature {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: #e5e7eb;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.feature span {
+    color: #2ecc71;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    margin-top: 25px;
+    color: #f5c400;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.agency-link {
+    background: #d34225;
+    color: white;
+    padding: 5px 12px;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 20px; /* Thoda gap badhaya nache disclaimer ke liye */
+}
+
+/* UPDATED DISCLAIMER DESIGN */
+.rb-disclaimer {
+    background: rgba(0, 229, 255, 0.05); /* Soft blue background tint */
+    border: 1px solid rgba(0, 229, 255, 0.2); /* Soft blue border */
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: justify;
+    color: #8ae2ff; /* Readable light blue text */
+}
+
+.rb-disclaimer strong {
+    color: #00e5ff !important; /* Bright cyan/blue for the word 'DISCLAIMER' */
+    letter-spacing: 0.5px;
+}
+</style>
+</head>
+
+<body>
+
+<video class="video-bg" autoplay muted loop playsinline>
+  <source src="https://assets.mixkit.co/videos/9607/9607-720.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+    <!-- <div class="profile">
+        <img src="nitin.png" alt="CA NITIN MURARKA INDEX TRADING">
+    </div> -->
+
+    <div class="title">𝗥𝗔𝗗𝗛𝗜𝗞𝗔</div>
+    <div class="subtitle">✅ Trusted By Thousands of Learners</div>
+
+    <div class="badges">
+        <div class="badge">📊 24/7 Updates</div>
+        <div class="badge">💎 Free to Join</div>
+    </div>
+
+    <a href="https://t.me/+LfIiBHmHjXdhMDVl" class="join-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM6.79 10.89l-.27 3.67c.39 0 .56-.17.77-.38l1.85-1.76 3.84 2.8c.7.39 1.19.19 1.36-.65l2.47-11.59c.22-.98-.35-1.37-1.05-1.14L1.13 6.24c-.95.37-.93.9-.17 1.14l3.57 1.11 8.3-5.23c.39-.26.74-.12.45.14L6.79 10.89z"/>
+        </svg>
+        JOIN TELEGRAM CHANNEL
+    </a>
+
+    <div class="features">
+        <div class="feature"><span>✔</span> Market Insights & Discussions</div>
+        <div class="feature"><span>✔</span> Learn with Experts</div>
+        <div class="feature"><span>✔</span> Practical Strategies</div>
+    </div>
+
+    <div class="footer">
+        ⚡ Stay Ahead with Knowledge ⚡ <br>
+        <span style="color: #bbb; font-size: 12px;">@Adzonn</span>
+    </div>
+
+    <a href="" target="_blank" class="agency-link">
+        📱 SIVIADSAGENCY
+    </a>
+
+    <!-- DISCLAIMER START -->
+    <p class="rb-disclaimer">
+      <strong>DISCLAIMER:</strong>
+      Educational platform. NITIN MURARKA is NOT SEBI registered. No tips or investment advice provided. Trading involves financial risk. This site is not part of Meta.
+    </p>
+    <!-- DISCLAIMER END -->
+</div>
+
+</body>
 </html>
